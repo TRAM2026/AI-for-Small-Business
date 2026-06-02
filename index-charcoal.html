@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       CAMACHO CONTRACTING SERVICES — Single Page Website
+       ALTERNATE color scheme: Dark Charcoal + Orange accent
+       (The primary navy + gold version lives in index.html)
+       Identical layout — only the palette tokens below changed,
+       so the two files are easy to compare.
+
+       HOW TO EDIT THIS SITE (for non-developers):
+       - PHONE NUMBER:   search the page for "678" to find every spot.
+       - EMAIL:          search for "Atlantapro.plumbing@gmail.com".
+       - ADDRESS:        search for "1590 Oak Creek".
+       - SERVICES:       see the section marked "SERVICES SECTION".
+       - REVIEWS:        see the section marked "REVIEWS SECTION".
+       - CALENDLY:       see the section marked "BOOKING SECTION".
+       Each major section below is wrapped in a clear comment block.
+  ============================================================ -->
+
+  <title>Camacho Contracting Services | Plumbing, Remodeling &amp; Drain Cleaning — Marietta, GA</title>
+  <meta name="description" content="Camacho Contracting Services — Licensed plumber Omar C. Camacho serving Marietta, GA and the Atlanta metro. Plumbing, remodeling, and drain cleaning. Honest pricing, fast response." />
+
+  <!-- Google Fonts: Oswald (bold headings) + Inter (body text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       1. DESIGN TOKENS / COLOR PALETTE
+       To re-theme the whole site, change these values only.
+    ============================================================ */
+    /* NOTE: variable names kept the same as the navy version on purpose,
+       so only these values change between the two theme files. */
+    :root {
+      --navy:        #23262b;  /* primary brand color — dark charcoal */
+      --navy-dark:   #16181c;  /* darker charcoal for depth */
+      --navy-light:  #2f333a;  /* lighter charcoal for cards on dark bg */
+      --gold:        #ec6a1e;  /* accent color — orange */
+      --gold-light:  #ff7e34;  /* hover state for accent */
+      --white:       #ffffff;
+      --off-white:   #f4f5f6;  /* light section backgrounds */
+      --gray-text:   #5c616b;  /* muted body text on light bg */
+      --light-text:  #c2c6cd;  /* muted text on dark bg */
+      --card-shadow: 0 10px 30px rgba(22, 24, 28, 0.14);
+      --radius:      14px;
+      --maxw:        1140px;
+    }
+
+    /* ============================================================
+       2. GLOBAL RESETS & BASE STYLES
+    ============================================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }       /* native smooth scroll for nav links */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, .display {
+      font-family: 'Oswald', 'Inter', sans-serif;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+    .section { padding: 72px 0; }
+    .section-title {
+      font-size: clamp(1.7rem, 5vw, 2.6rem);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--gray-text);
+      max-width: 620px;
+      margin: 0 auto 46px;
+      font-size: 1.05rem;
+    }
+    .accent-bar { /* small gold underline used under section titles */
+      width: 64px; height: 4px; background: var(--gold);
+      border-radius: 4px; margin: 14px auto 30px;
+    }
+
+    /* ============================================================
+       3. BUTTONS (tap-to-call, CTAs)
+    ============================================================ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px;
+      font-size: 1.05rem;
+      padding: 16px 30px;
+      border-radius: 10px;
+      cursor: pointer; border: none;
+      transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+      min-height: 54px; /* large tap target for mobile */
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-gold {
+      background: var(--gold); color: var(--navy-dark);
+      box-shadow: 0 8px 20px rgba(236, 106, 30, 0.35);
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+    /* ============================================================
+       4. NAVBAR
+    ============================================================ */
+    header.nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(22, 24, 28, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--white); }
+    .brand .logo-mark {
+      width: 38px; height: 38px; border-radius: 8px;
+      background: var(--gold); color: var(--navy-dark);
+      display: grid; place-items: center;
+      font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.3rem;
+    }
+    .brand .brand-text { font-family: 'Oswald', sans-serif; font-weight: 600;
+      letter-spacing: 0.5px; font-size: 1.05rem; line-height: 1.1; }
+    .brand .brand-text small { display: block; font-size: 0.62rem; color: var(--gold);
+      letter-spacing: 2px; font-family: 'Inter', sans-serif; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: var(--light-text); font-size: 0.95rem; font-weight: 500;
+      transition: color 0.2s ease; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links .nav-call {
+      color: var(--gold); font-weight: 700; font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    /* Mobile hamburger */
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-toggle span { display: block; width: 26px; height: 3px; background: var(--white);
+      margin: 5px 0; border-radius: 2px; transition: 0.3s; }
+
+    @media (max-width: 860px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: absolute; top: 68px; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: var(--navy-dark);
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.35s ease;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .nav-links.open { max-height: 360px; }
+      .nav-links a { width: 100%; padding: 16px 22px; border-top: 1px solid rgba(255,255,255,0.06); }
+    }
+
+    /* ============================================================
+       5. HERO SECTION
+    ============================================================ */
+    .hero {
+      position: relative;
+      color: var(--white);
+      text-align: center;
+      padding: 96px 0 104px;
+      /* Strong, trustworthy gradient over a subtle texture.
+         To use a real photo: add  url('your-photo.jpg')  before the gradient. */
+      background:
+        linear-gradient(rgba(22, 24, 28,0.92), rgba(22, 24, 28,0.97)),
+        radial-gradient(circle at 20% 20%, var(--navy-light), var(--navy-dark));
+      overflow: hidden;
+    }
+    /* faint diagonal "blueprint" lines for a trades feel */
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 22px);
+      pointer-events: none;
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero .eyebrow {
+      display: inline-block; color: var(--gold);
+      font-family: 'Oswald', sans-serif; font-weight: 600;
+      letter-spacing: 3px; font-size: 0.85rem; text-transform: uppercase;
+      margin-bottom: 18px;
+      border: 1px solid rgba(236, 106, 30,0.4); padding: 7px 16px; border-radius: 30px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 7vw, 4.1rem);
+      margin-bottom: 18px;
+    }
+    .hero h1 .hl { color: var(--gold); }
+    .hero p.sub {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      color: var(--light-text);
+      max-width: 640px; margin: 0 auto 36px;
+    }
+    .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .hero-trust {
+      margin-top: 38px; display: flex; gap: 26px; justify-content: center; flex-wrap: wrap;
+      color: var(--light-text); font-size: 0.9rem;
+    }
+    .hero-trust span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-trust svg { width: 18px; height: 18px; fill: var(--gold); }
+
+    /* ============================================================
+       6. SERVICES SECTION  (edit the three cards here)
+    ============================================================ */
+    .services { background: var(--off-white); }
+    .cards-3 {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px;
+    }
+    .service-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 38px 28px; text-align: center;
+      box-shadow: var(--card-shadow);
+      border-top: 4px solid var(--gold);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(22, 24, 28,0.18); }
+    .service-icon {
+      width: 72px; height: 72px; margin: 0 auto 20px;
+      background: var(--navy); border-radius: 16px;
+      display: grid; place-items: center;
+    }
+    .service-icon svg { width: 38px; height: 38px; fill: var(--gold); }
+    .service-card h3 { font-size: 1.35rem; margin-bottom: 10px; color: var(--navy); }
+    .service-card p { color: var(--gray-text); font-size: 0.98rem; }
+
+    /* ============================================================
+       7. WHY CAMACHO SECTION
+    ============================================================ */
+    .why { background: var(--navy); color: var(--white); }
+    .why .section-title { color: var(--white); }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 10px;
+    }
+    .why-item {
+      background: var(--navy-light); border-radius: var(--radius);
+      padding: 30px 24px; text-align: center;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .why-item .why-ico {
+      width: 58px; height: 58px; margin: 0 auto 16px;
+      border-radius: 50%; background: rgba(236, 106, 30,0.15);
+      display: grid; place-items: center;
+    }
+    .why-item .why-ico svg { width: 28px; height: 28px; fill: var(--gold); }
+    .why-item h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .why-item p { color: var(--light-text); font-size: 0.92rem; }
+
+    /* ============================================================
+       8. HOW IT WORKS SECTION
+    ============================================================ */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; position: relative; }
+    .step { text-align: center; padding: 14px; }
+    .step .num {
+      width: 76px; height: 76px; margin: 0 auto 20px;
+      border-radius: 50%; background: var(--navy); color: var(--gold);
+      display: grid; place-items: center;
+      font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700;
+      border: 3px solid var(--gold);
+    }
+    .step h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .step p { color: var(--gray-text); font-size: 0.97rem; max-width: 280px; margin: 0 auto; }
+
+    /* ============================================================
+       9. BOOKING SECTION (Calendly embed goes here)
+    ============================================================ */
+    .booking { background: var(--off-white); }
+    .calendly-box {
+      background: var(--white);
+      border: 2px dashed var(--gold);
+      border-radius: var(--radius);
+      max-width: 760px; margin: 0 auto;
+      min-height: 420px;
+      display: grid; place-items: center; text-align: center;
+      padding: 40px 24px;
+      color: var(--gray-text);
+    }
+    .calendly-box svg { width: 56px; height: 56px; fill: var(--gold); margin-bottom: 16px; }
+    .calendly-box h3 { color: var(--navy); font-size: 1.3rem; margin-bottom: 8px; }
+
+    /* ============================================================
+       10. REVIEWS SECTION  (edit the three review cards here)
+    ============================================================ */
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+    .review-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 30px 26px; box-shadow: var(--card-shadow);
+      display: flex; flex-direction: column;
+    }
+    .stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .review-card p.quote { color: var(--navy); font-size: 1rem; flex: 1; margin-bottom: 18px; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .reviewer .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--navy); color: var(--gold);
+      display: grid; place-items: center;
+      font-family: 'Oswald', sans-serif; font-weight: 700;
+    }
+    .reviewer .who strong { display: block; font-size: 0.95rem; color: var(--navy); }
+    .reviewer .who span { font-size: 0.82rem; color: var(--gray-text); }
+
+    /* ============================================================
+       11. CONTACT / FOOTER
+    ============================================================ */
+    footer.site-footer { background: var(--navy-dark); color: var(--white); padding: 60px 0 28px; }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 36px;
+      padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-grid h4 {
+      font-family: 'Oswald', sans-serif; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--gold); font-size: 0.95rem; margin-bottom: 16px;
+    }
+    .footer-grid p, .footer-grid a { color: var(--light-text); font-size: 0.95rem; margin-bottom: 10px; }
+    .footer-grid a:hover { color: var(--white); }
+    .footer-contact-row { display: flex; align-items: center; gap: 10px; }
+    .footer-contact-row svg { width: 18px; height: 18px; fill: var(--gold); flex-shrink: 0; }
+    .footer-brand .logo-mark {
+      width: 44px; height: 44px; border-radius: 8px; background: var(--gold);
+      color: var(--navy-dark); display: grid; place-items: center;
+      font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.5rem; margin-bottom: 14px;
+    }
+    .footer-license {
+      display: inline-block; margin-top: 6px;
+      background: rgba(236, 106, 30,0.15); color: var(--gold);
+      padding: 6px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
+    }
+    .footer-bottom { text-align: center; padding-top: 22px; color: var(--light-text); font-size: 0.85rem; }
+
+    /* ============================================================
+       12. FLOATING CHAT WIDGET (UI placeholder only — no function)
+    ============================================================ */
+    .chat-fab {
+      position: fixed; bottom: 22px; right: 22px; z-index: 200;
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: var(--navy-dark);
+      font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: 0.5px;
+      padding: 14px 20px; border-radius: 50px; border: none; cursor: pointer;
+      box-shadow: 0 10px 28px rgba(236, 106, 30,0.45);
+      transition: transform 0.18s ease, background 0.2s ease;
+      animation: chatPulse 2.6s infinite;
+    }
+    .chat-fab:hover { background: var(--gold-light); transform: translateY(-3px); }
+    .chat-fab svg { width: 22px; height: 22px; fill: var(--navy-dark); }
+    @keyframes chatPulse {
+      0%   { box-shadow: 0 10px 28px rgba(236, 106, 30,0.45); }
+      50%  { box-shadow: 0 10px 28px rgba(236, 106, 30,0.75); }
+      100% { box-shadow: 0 10px 28px rgba(236, 106, 30,0.45); }
+    }
+
+    /* ============================================================
+       13. RESPONSIVE / MOBILE-FIRST BREAKPOINTS
+    ============================================================ */
+    @media (max-width: 900px) {
+      .cards-3, .reviews-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .section { padding: 56px 0; }
+      .cards-3, .reviews-grid, .steps, .why-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .hero-cta .btn { width: 100%; }
+      .chat-fab span { display: inline; } /* keep label on mobile too */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR  (phone number appears in .nav-call)
+  ============================================================ -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#hero" class="brand" aria-label="Camacho Contracting Services home">
+        <span class="logo-mark">C</span>
+        <span class="brand-text">Camacho<br><small>Contracting Services</small></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#why">Why Us</a>
+        <a href="#how">How It Works</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#booking">Book</a>
+        <!-- PHONE NUMBER (nav) -->
+        <a href="tel:+16784275523" class="nav-call">(678) 427-5523</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       1. HERO SECTION
+  ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <span class="eyebrow">Licensed Plumber · Marietta, GA</span>
+      <h1>Reliable Plumbing &amp; Remodeling You Can <span class="hl">Trust</span></h1>
+      <p class="sub">
+        Camacho Contracting Services delivers honest, professional plumbing,
+        remodeling, and drain cleaning across Marietta and the Atlanta metro.
+        Done right the first time.
+      </p>
+      <div class="hero-cta">
+        <!-- TAP-TO-CALL BUTTON (phone number) -->
+        <a href="tel:+16784275523" class="btn btn-gold">
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.1 2.2z"/></svg>
+          Call (678) 427-5523
+        </a>
+        <a href="#booking" class="btn btn-outline">Book a Visit</a>
+      </div>
+
+      <div class="hero-trust">
+        <span><svg viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-4zm-1.2 14L7 11.2l1.4-1.4 2.4 2.4 5-5L17.2 8 10.8 15z"/></svg> Licensed &amp; Insured</span>
+        <span><svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg> Local to Marietta</span>
+        <span><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 11h-3V6h2v5h3v2z"/></svg> Fast Response</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       2. SERVICES SECTION
+       EDIT HERE: change the three service cards (title + 1-line description)
+  ============================================================ -->
+  <section class="section services" id="services">
+    <div class="container">
+      <h2 class="section-title">Our Services</h2>
+      <div class="accent-bar"></div>
+      <p class="section-sub">From quick repairs to full remodels — one licensed pro for the whole job.</p>
+
+      <div class="cards-3">
+        <!-- Service 1: Plumbing -->
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M19.7 5.3 16 9l-1-1 3.7-3.7a1 1 0 0 1 1.4 0l.6.6a1 1 0 0 1 0 1.4zM3 19l6.5-6.5 2 2L5 21H3v-2zm9.5-8.5L10 8l1.4-1.4a4 4 0 0 1 5.6 0l-1.5 1.5a2 2 0 0 0-2.8 0l-.2.4z"/></svg>
+          </div>
+          <h3>Plumbing</h3>
+          <p>Repairs, installations, and upgrades for leaks, fixtures, water heaters, and more.</p>
+        </div>
+
+        <!-- Service 2: Remodeling -->
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 21v-3l11-11 3 3L6 21H3zM14.7 5.3l1.5-1.5a1 1 0 0 1 1.4 0l2.6 2.6a1 1 0 0 1 0 1.4l-1.5 1.5-4-4zM3 21h18v-2H3v2z"/></svg>
+          </div>
+          <h3>Remodeling</h3>
+          <p>Kitchen and bathroom remodels done cleanly, on schedule, and built to last.</p>
+        </div>
+
+        <!-- Service 3: Drain Cleaning -->
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2c-1 2-4 4.5-4 8a4 4 0 0 0 8 0c0-3.5-3-6-4-8zM5 20a7 7 0 0 0 14 0H5z"/></svg>
+          </div>
+          <h3>Drain Cleaning</h3>
+          <p>Fast, thorough clearing of clogged drains and sewer lines to get things flowing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. WHY CAMACHO SECTION  (trust bullets)
+  ============================================================ -->
+  <section class="section why" id="why">
+    <div class="container">
+      <h2 class="section-title">Why Camacho</h2>
+      <div class="accent-bar"></div>
+
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-ico"><svg viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-4zm-1.2 14L7 11.2l1.4-1.4 2.4 2.4 5-5L17.2 8 10.8 15z"/></svg></div>
+          <h3>Licensed &amp; Insured</h3>
+          <p>State-licensed plumber (JP507184). Fully insured for your peace of mind.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div>
+          <h3>Marietta Local</h3>
+          <p>Your neighbor, not a faceless chain. We know homes in the Atlanta metro.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-ico"><svg viewBox="0 0 24 24"><path d="M12 1 9 4H4v5l-3 3 3 3v5h5l3 3 3-3h5v-5l3-3-3-3V4h-5l-3-3zm0 6a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/></svg></div>
+          <h3>Honest Pricing</h3>
+          <p>Clear, upfront quotes with no surprises. You approve the price before we start.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-ico"><svg viewBox="0 0 24 24"><path d="M13 2 4.1 13.4c-.4.5 0 1.2.6 1.2H11l-1 7.4 8.9-11.4c.4-.5 0-1.2-.6-1.2H12l1-7.4z"/></svg></div>
+          <h3>Fast Response</h3>
+          <p>Quick scheduling and on-time arrivals. We respect your time and your home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. HOW IT WORKS SECTION  (3 simple steps)
+  ============================================================ -->
+  <section class="section how" id="how">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="accent-bar"></div>
+      <p class="section-sub">Getting your project handled is simple.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <h3>Call or Book Online</h3>
+          <p>Reach out by phone or schedule a visit online in under a minute.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h3>We Assess the Job</h3>
+          <p>Omar inspects the work, explains your options, and gives an honest quote.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h3>Problem Solved</h3>
+          <p>We do the job right, clean up, and make sure you're fully satisfied.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. BOOKING SECTION  (Calendly embed target)
+  ============================================================ -->
+  <section class="section booking" id="booking">
+    <div class="container">
+      <h2 class="section-title">Schedule Your Visit</h2>
+      <div class="accent-bar"></div>
+      <p class="section-sub">Pick a time that works for you. We'll confirm and show up ready to work.</p>
+
+      <!-- ===========================================================
+           CALENDLY EMBED GOES HERE.
+           To activate online booking:
+           1) Replace the contents of this .calendly-box <div> with:
+              <div class="calendly-inline-widget"
+                   data-url="https://calendly.com/YOUR-USERNAME"
+                   style="min-width:320px;height:700px;"></div>
+           2) Add this script tag (also see the matching note in the
+              <script> block near the bottom of this file):
+              <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      ============================================================ -->
+      <div class="calendly-box" id="calendlyPlaceholder">
+        <div>
+          <svg viewBox="0 0 24 24"><path d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm12 7v10H5V9h14zM7 11v2h2v-2H7zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2z"/></svg>
+          <h3>Online Booking Coming Soon</h3>
+          <p>Your Calendly scheduler will appear right here.<br>
+             For now, call <strong>(678) 427-5523</strong> to book your visit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. REVIEWS SECTION
+       EDIT HERE: change the three review cards (quote + name + area)
+  ============================================================ -->
+  <section class="section reviews" id="reviews">
+    <div class="container">
+      <h2 class="section-title">What Marietta Homeowners Say</h2>
+      <div class="accent-bar"></div>
+
+      <div class="reviews-grid">
+        <!-- Review 1 -->
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"Omar fixed a burst pipe under our kitchen sink the same day I called. Fair price, no mess left behind, and he explained everything. Hard to find this kind of service anymore."</p>
+          <div class="reviewer">
+            <div class="avatar">DM</div>
+            <div class="who"><strong>Danielle M.</strong><span>East Cobb, Marietta</span></div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"We had Camacho remodel our master bathroom and the work is flawless. On time every day and the new plumbing is rock solid. Highly recommend to anyone in the area."</p>
+          <div class="reviewer">
+            <div class="avatar">RT</div>
+            <div class="who"><strong>Robert T.</strong><span>Kennesaw, GA</span></div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"Our main drain was completely clogged and backing up. Omar came out fast, cleared it in no time, and didn't try to upsell me on stuff I didn't need. Honest guy."</p>
+          <div class="reviewer">
+            <div class="avatar">SP</div>
+            <div class="who"><strong>Sandra P.</strong><span>Marietta, GA</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. CONTACT / FOOTER
+       EDIT HERE: phone, email, address, license number
+  ============================================================ -->
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand + license -->
+        <div class="footer-brand">
+          <div class="logo-mark">C</div>
+          <h4 style="color:#fff;">Camacho Contracting Services</h4>
+          <p>Licensed plumbing, remodeling, and drain cleaning serving Marietta and the greater Atlanta metro.</p>
+          <span class="footer-license">License #JP507184</span>
+        </div>
+
+        <!-- Contact details -->
+        <div>
+          <h4>Get In Touch</h4>
+          <!-- PHONE -->
+          <p class="footer-contact-row">
+            <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.1 2.2z"/></svg>
+            <a href="tel:+16784275523">(678) 427-5523</a>
+          </p>
+          <!-- EMAIL -->
+          <p class="footer-contact-row">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 4v10h16V8l-8 5-8-5zm0-2 8 5 8-5H4z"/></svg>
+            <a href="mailto:Atlantapro.plumbing@gmail.com">Atlantapro.plumbing@gmail.com</a>
+          </p>
+          <!-- ADDRESS -->
+          <p class="footer-contact-row">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+            <span>1590 Oak Creek Dr,<br>Marietta, GA 30066</span>
+          </p>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <h4>Quick Links</h4>
+          <p><a href="#services">Services</a></p>
+          <p><a href="#why">Why Camacho</a></p>
+          <p><a href="#how">How It Works</a></p>
+          <p><a href="#reviews">Reviews</a></p>
+          <p><a href="#booking">Book a Visit</a></p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; <span id="year"></span> Camacho Contracting Services · Owner: Omar C. Camacho · License #JP507184 · Marietta, GA
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       5. FLOATING CHAT WIDGET  (UI placeholder — no functionality)
+       This is where the AI assistant will eventually live.
+  ============================================================ -->
+  <button class="chat-fab" id="chatFab" aria-label="Open chat">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2zm3 5v2h10V9H7zm0 4v2h7v-2H7z"/></svg>
+    <span>Need Help? Chat Now</span>
+  </button>
+
+  <!-- ============================================================
+       JAVASCRIPT  (vanilla JS only)
+  ============================================================ -->
+  <script>
+    /* ---- Mobile menu toggle ---- */
+    var navToggle = document.getElementById('navToggle');
+    var navLinks  = document.getElementById('navLinks');
+    navToggle.addEventListener('click', function () {
+      var isOpen = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    /* ---- Close mobile menu after tapping a link ---- */
+    navLinks.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ---- Smooth scrolling for nav links (fallback for older browsers;
+            modern browsers also use CSS scroll-behavior: smooth) ---- */
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        var targetId = this.getAttribute('href');
+        if (targetId.length > 1) {
+          var target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+
+    /* ---- Chat widget placeholder click (no real chat yet) ---- */
+    document.getElementById('chatFab').addEventListener('click', function () {
+      alert("Chat assistant coming soon!\n\nIn the meantime, call us at (678) 427-5523.");
+    });
+
+    /* ---- Auto-update footer year ---- */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===========================================================
+       CALENDLY SCRIPT TAG NOTE:
+       When you're ready to enable online booking, add this line
+       just below (and follow the matching instructions in the
+       BOOKING SECTION markup above):
+
+       <script src="https://assets.calendly.com/assets/external/widget.js" async><\/script>
+    ============================================================ */
+  </script>
+</body>
+</html>
