@@ -180,7 +180,7 @@
       position: relative;
       color: var(--white);
       text-align: center;
-      padding: 96px 0 104px;
+      padding: 48px 0 80px;
       /* Strong, trustworthy gradient over a subtle texture.
          To use a real photo: add  url('your-photo.jpg')  before the gradient. */
       background:
@@ -195,6 +195,13 @@
       pointer-events: none;
     }
     .hero .container { position: relative; z-index: 1; }
+    /* HERO BANNER IMAGE (hero.jpg) */
+    .hero-image {
+      width: 100%; max-width: 920px; height: auto;
+      margin: 0 auto 30px; border-radius: var(--radius);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
     .hero .eyebrow {
       display: inline-block; color: var(--gold);
       font-family: 'Oswald', sans-serif; font-weight: 600;
@@ -418,13 +425,30 @@
   ============================================================ -->
   <section class="hero" id="hero">
     <div class="container">
-      <span class="eyebrow">Licensed Plumber · Marietta, GA</span>
-      <h1>Reliable Plumbing &amp; Remodeling You Can <span class="hl">Trust</span></h1>
-      <p class="sub">
-        Camacho Contracting Services delivers honest, professional plumbing,
-        remodeling, and drain cleaning across Marietta and the Atlanta metro.
-        Done right the first time.
-      </p>
+
+      <!-- ===========================================================
+           HERO IMAGE / BANNER
+           To change this image: replace the file named "hero.jpg"
+           that sits in the same folder as this file.
+           (Keep the name exactly "hero.jpg".)
+           If hero.jpg is missing, the text headline below shows instead.
+      ============================================================ -->
+      <img src="hero.jpg"
+           alt="Omar C. Camacho, Licensed Plumber — Camacho Contracting Services. Plumbing, Remodeling, Drain Cleaning, Repairs. Call (678) 427-5523. Strong work. Clean results."
+           class="hero-image" id="heroImage"
+           onerror="this.style.display='none';document.getElementById('heroFallback').style.display='block';" />
+
+      <!-- Text fallback: only appears if hero.jpg has not been uploaded yet -->
+      <div id="heroFallback" style="display:none;">
+        <span class="eyebrow">Licensed Plumber · Marietta, GA</span>
+        <h1>Reliable Plumbing &amp; Remodeling You Can <span class="hl">Trust</span></h1>
+        <p class="sub">
+          Camacho Contracting Services delivers honest, professional plumbing,
+          remodeling, and drain cleaning across Marietta and the Atlanta metro.
+          Done right the first time.
+        </p>
+      </div>
+
       <div class="hero-cta">
         <!-- TAP-TO-CALL BUTTON (phone number) -->
         <a href="tel:+16784275523" class="btn btn-gold">
